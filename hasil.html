@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hasil Transaksi</title>
+</head>
+<body>
+    <table border="0" style="margin: 0 auto;">
+        <tr>
+            <td colspan="3" align="center">
+                <table border="1" style="margin: 0 auto; border-collapse: collapse;">
+                    <tr>
+                        <td><a href="prak2_kelompok_1_desainuiux_pemweb.html">Home</a></td>
+                        <td><a href="#">Generate Link</a></td>
+                        <td><a href="#">Transaction History</a></td>
+                        <td><a href="#">Policy</a></td>
+                        <td><a href="#">Logout</a></td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td rowspan="9" width="150" valign="top">
+                <div style="border: 1px solid black; width: 120px; height: 120px; text-align: center; line-height: 120px; overflow: hidden;">
+                    <img id="preview" src="" alt="Image" style="display:none; max-width: 100%; max-height: 100%;">
+                    <span id="placeholder">Image</span>
+                </div>
+            </td>
+            <td>Title Here :</td>
+            <td id="res-title"></td>
+        </tr>
+        <tr>
+            <td valign="top">Description :</td>
+            <td id="res-description"></td>
+        </tr>
+        <tr>
+            <td>Account Number :</td>
+            <td id="res-account_number"></td>
+        </tr>
+        <tr>
+            <td>Bank :</td>
+            <td id="res-bank"></td>
+        </tr>
+        <tr>
+            <td>Account Holder :</td>
+            <td id="res-account_holder"></td>
+        </tr>
+        <tr>
+            <td>Transaction :</td>
+            <td id="res-transaction"></td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <input type="checkbox" id="res-send_mobile" disabled> Send to Mobile Phone
+                <br>
+                <input type="checkbox" id="res-send_email" disabled> Send to Email
+            </td>
+        </tr>
+        <tr>
+            <td>Send to Mobile Phone :</td>
+            <td id="res-mobile"></td>
+        </tr>
+        <tr>
+            <td>Send to Email :</td>
+            <td id="res-email"></td>
+        </tr>
+        <tr>
+            <td></td>
+          
+        </tr>
+    </table>
+
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        
+        if (params.has('title')) document.getElementById('res-title').innerText = params.get('title');
+        if (params.has('description')) document.getElementById('res-description').innerText = params.get('description');
+        if (params.has('account_number')) document.getElementById('res-account_number').innerText = params.get('account_number');
+        if (params.has('bank')) document.getElementById('res-bank').innerText = params.get('bank');
+        if (params.has('account_holder')) document.getElementById('res-account_holder').innerText = params.get('account_holder');
+        if (params.has('transaction')) document.getElementById('res-transaction').innerText = params.get('transaction');
+        if (params.has('mobile')) document.getElementById('res-mobile').innerText = params.get('mobile');
+        if (params.has('email')) document.getElementById('res-email').innerText = params.get('email');
+        
+        document.getElementById('res-send_mobile').checked = params.has('send_mobile');
+        document.getElementById('res-send_email').checked = params.has('send_email');
+
+        const savedImage = localStorage.getItem('uploaded_image');
+        const preview = document.getElementById('preview');
+        const placeholder = document.getElementById('placeholder');
+        if (savedImage) {
+            preview.src = savedImage;
+            preview.style.display = 'block';
+            placeholder.style.display = 'none';
+        }
+    </script>
+</body>
+</html>

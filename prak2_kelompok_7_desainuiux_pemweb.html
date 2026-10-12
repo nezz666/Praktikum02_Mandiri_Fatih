@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Form Pemesanan Barang</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            font-family: Arial, sans-serif;
+        }
+        form {
+            padding: 20px;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+        }
+        table {
+            margin: auto;
+        }
+        td {
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+    <form action="hasil.html" method="GET" id="uploadForm">
+    <table border="0">
+        <tr>
+            <td colspan="2">
+                <a href="hasil.html">Home</a> | 
+                <a href="#">Generate Link</a> | 
+                <a href="#">Transaction History</a> | 
+                <a href="#">Policy</a> | 
+                <a href="#">Logout</a>
+            </td>
+        </tr>
+        <tr>
+            <td rowspan="8" width="150" valign="top">
+                <div style="border: 1px solid black; width: 120px; height: 120px; text-align: center; line-height: 120px; overflow: hidden;">
+                    <img id="preview" src="" alt="Image" style="display:none; max-width: 100%; max-height: 100%;">
+                    <span id="placeholder">Image</span>
+                </div>
+            <label for="gambar">Pilih Gambar:</label>
+            <input type="file" id="gambar" name="gambar" accept="image/*">
+            </td>
+            <td>Title Here :</td>
+            <td><input type="text" name="title" size="30" placeholder="Title Here"></td>
+        </tr>
+        <tr>
+            <td valign="top">Description :</td>
+            <td>
+                <textarea name="description" rows="4" cols="32" placeholder="Description"></textarea>
+            </td>
+        </tr>
+        <tr>
+            <td>Account Number :</td>
+            <td><input type="text" name="account_number" size="30" placeholder="Account Number"></td>
+        </tr>
+        <tr>
+            <td>Bank :</td>
+            <td>
+                <select name="bank">
+                    <option value="Select One">Select One</option>
+                    <option value="HSBC">HSBC</option>
+                    <option value="BCA">BCA</option>
+                    <option value="Mandiri">Mandiri</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>Account Holder :</td>
+            <td><input type="text" name="account_holder" size="30" placeholder="Account Holder"></td>
+        </tr>
+        <tr>
+            <td>Transaction :</td>
+            <td>
+                <select name="transaction">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                </select>
+                <br>
+                <small>* if the transaction is for 3 person, choose 3 from the drop-down list</small>
+                <br>
+                <input type="checkbox" name="send_mobile" checked> Send to Mobile Phone
+                <br>
+                <input type="checkbox" name="send_email" checked> Send to Email
+            </td>
+        </tr>
+        <tr>
+            <td>Send to Mobile Phone :</td>
+            <td><input type="text" name="mobile" size="30" placeholder="Mobile Phone"></td>
+        </tr>
+        <tr>
+            <td>Send to Email :</td>
+            <td><input type="text" name="email" size="30" placeholder="Email"></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td colspan="2">
+                <button type="submit">Submit</button>
+            </td>
+        </tr>
+    </table>
+    </form>
+
+    <script>
+        const fileInput = document.getElementById('gambar');
+        const preview = document.getElementById('preview');
+        const placeholder = document.getElementById('placeholder');
+        const form = document.getElementById('uploadForm');
+
+        fileInput.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    preview.src = event.target.result;
+                    preview.style.display = 'block';
+                    placeholder.style.display = 'none';
+                    try {
+                        localStorage.setItem('uploaded_image', event.target.result);
+                    } catch (err) {
+                        console.error('Storage failed', err);
+                    }
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        form.addEventListener('submit', function() {
+            // Check if file wasn't changed this time but already in storage, or clear if needed
+        });
+    </script>
+</body>
+</html>
